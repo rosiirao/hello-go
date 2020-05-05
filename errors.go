@@ -29,7 +29,7 @@ func runError() (e error) {
 			}
 		}
 	}()
-	panic("run error")
+	// panic("run error")
 	return &MyError{
 		time.Now(),
 		"it didn't work",

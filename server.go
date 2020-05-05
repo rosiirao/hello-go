@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -11,16 +12,25 @@ var addr = flag.String("addr", ":1778", "http service address") // Q=17, R=18
 
 var templ = template.Must(template.New("qr").Parse(templateStr))
 
-func runServer() {
-	flag.Parse()
+func runServer(c chan bool) *http.Server {
+	fmt.Println("--- entering runServer ---")
+	defer fmt.Println(`--- leaving runServer ---`)
+	defer flag.Parse()
 	http.Handle("/", http.HandlerFunc(QR))
 
-	err := http.ListenAndServe(*addr, nil)
-	if err != nil {
-		log.Fatal("ListenAndServe:", err)
-	}
+	srv := &http.Server{Addr: *addr}
+
+	go func() {
+		defer close(c)
+		err := srv.ListenAndServe()
+		if err != nil {
+			log.Fatal("ListenAndServe:", err)
+		}
+	}()
+	return srv
 }
 
+// QR output qr code
 func QR(w http.ResponseWriter, req *http.Request) {
 	templ.Execute(w, req.FormValue("s"))
 }

@@ -1,7 +1,11 @@
 package main
 
 import (
+	"bufio"
+	"context"
 	"fmt"
+	"io"
+	"os"
 	"strings"
 
 	"github.com/rosiirao/hello-go/module"
@@ -50,8 +54,30 @@ func main() {
 
 	sumChannel()
 
+	runPointer(pTE())
+
 	module.HelloModule()
-	// runServer()
+
+	c := make(chan bool)
+	srv := runServer(c)
+
+	r := bufio.NewReader(os.Stdin)
+	fmt.Println("Input \"quit\" to exit server")
+	for {
+		if text, err := r.ReadString('\n'); err != io.EOF {
+			text = strings.TrimSpace(text)
+			if text == "quit" {
+				fmt.Printf("server will %v\n", text)
+				ctx := context.Background()
+				srv.Shutdown(ctx)
+				break
+			} else {
+				fmt.Printf("Your input command is %v\n", text)
+			}
+		}
+	}
+
+	<-c
 	if err := runError(); err != nil {
 		fmt.Println(err)
 	}
