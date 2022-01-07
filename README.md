@@ -13,12 +13,19 @@ go clean
 ### start module
 
 ```sh
+# Create a new mod, as well as a go.mod file
 go mod init github.com/rosiirao/hello-go
-go mod tidy # removes any dependencies the module might have accumulated that are no longer necessary.
+
+# Add the quote module as a requirement, as well as a go.sum file
+# file for use in authenticating the module
+# removes any dependencies the module might have accumulated that are no longer necessary.
+# @see https://go.dev/ref/mod#authenticating for go.sum file
+go mod tidy 
+
 go list -m all
 go mod graph
 go mod why -m
-go get  # upgrade or downgrade to the correct version
+go get .  # upgrade or downgrade to the correct version
 ```
 
 ## uninstall
@@ -56,7 +63,7 @@ go run --work .
 
 In a := declaration a variable v may appear even if it has already been declared, provided:
 
-- this declaration is in the same scope as the existing declaration of v (if v is already declared in an outer scope, the declaration will create a new variable §[^1]),
+- this declaration is in the same scope as the existing declaration of v (if v is already declared in an outer scope, the declaration will create a new variable §[^1])
 - the corresponding value in the initialization is assignable to v, and
 - there is at least one other variable that is created by the declaration.
 
