@@ -10,11 +10,13 @@ type E struct {
 // F for f()
 type F interface {
 	f() int
+	f2() float32
 }
 
 // G for g()
 type G interface {
 	g()
+	g2()
 }
 
 func (e *E) f() int {
@@ -34,10 +36,10 @@ func tE() E {
 	}
 }
 
-func runPointer(x interface{}) {
+func runPointer(x interface{}) { // type switch requires an interface to introspect
 	fmt.Println("--- entering runPointer ---")
 	defer fmt.Println("--- leaving runPointer ---")
-	switch e := x.(type) {
+	switch e := x.(type) { // if x is value, then can cast it to an interface: interface{}(x)
 	case E:
 		fmt.Printf("pointer to E : %v \n", e.f())
 	case F:

@@ -1,3 +1,3 @@
 module github.com/rosiirao/hello-go
 
-go 1.12
+go 1.17

@@ -83,7 +83,7 @@ func main() {
 	}
 }
 
-// WordCount count string
+// WordCount count word in string
 func WordCount(s string) map[string]int {
 	m := make(map[string]int)
 	for _, v := range strings.Fields(s) {

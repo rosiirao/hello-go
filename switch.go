@@ -19,5 +19,7 @@ func PrintType(t interface{}) {
 		fmt.Printf("pointer to boolean %t\n", *t)
 	case *int:
 		fmt.Printf("pointer to integer %d\n", *t)
+	case float32, float64:
+		fmt.Printf("pointer to float %f\n", t)
 	}
 }
