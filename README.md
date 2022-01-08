@@ -57,14 +57,46 @@ go run .
 go run --work .
 ```
 
+## Escape analysis
+
+- [Stack memory allocation](https://en.wikipedia.org/wiki/Stack-based_memory_allocation)
+- [Heap memory](https://en.wikipedia.org/wiki/Memory_management#HEAP)
+- [Escape analysis](https://en.wikipedia.org/wiki/Escape_analysis)
+  - Variable escape to heap
+
+```sh
+# Print variable escapes to heap
+go build -gcflags '-m'
+# Print heap details
+go build -gcflags '-m -m'
+```
+
 ## Golang knowledge
 
 ### Re-declaration and reassignment
 
-In a := declaration a variable v may appear even if it has already been declared, provided:
+In a *:=* declaration a variable v may appear even if it has already been declared, provided:
 
 - this declaration is in the same scope as the existing declaration of v (if v is already declared in an outer scope, the declaration will create a new variable §[^1])
 - the corresponding value in the initialization is assignable to v, and
 - there is at least one other variable that is created by the declaration.
 
+Constants cannot be declared using the *:=* syntax.
+
 [^1]: It's worth noting here that in Go the scope of function parameters and return values is the same as the function body, even though they appear lexically outside the braces that enclose the body.
+
+### Type conversions
+
+```go
+// The expression T(v) converts the value to the type T
+var f float32 = 3.00
+var z uint = uint(f)
+```
+
+### pointer
+
+```go
+i := 42
+p := &i
+*p = *p * 5
+```

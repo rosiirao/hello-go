@@ -23,3 +23,15 @@ func PrintType(t interface{}) {
 		fmt.Printf("pointer to float %f\n", t)
 	}
 }
+
+/**
+ * IsString check the value is string by v.(T)
+ */
+func IsString(v interface{}) (ok bool) {
+	_, ok = v.(string)
+	switch {
+	case ok:
+		fmt.Printf(("%v is string"), v)
+	}
+	return
+}

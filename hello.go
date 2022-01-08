@@ -38,6 +38,7 @@ func main() {
 	// fmt.Println(s == s)
 	PrintType(len(s))
 	PrintType(cap(s1))
+	PrintType(func(i interface{}) {})
 
 	var m map[string]int
 	// m["ok"] = 1
