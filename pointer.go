@@ -30,12 +30,6 @@ func pTE() *E {
 	return &e
 }
 
-func tE() E {
-	return E{
-		20,
-	}
-}
-
 func runPointer(x interface{}) { // type switch requires an interface to introspect
 	fmt.Println("--- entering runPointer ---")
 	defer fmt.Println("--- leaving runPointer ---")

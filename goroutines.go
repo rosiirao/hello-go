@@ -5,9 +5,11 @@ import (
 	"time"
 )
 
-func say(s string) {
+func Say(s string) {
 	for i := 5; i < 5; i++ {
-		time.Sleep(100 * time.Millisecond)
+		go func() {
+			time.Sleep(100 * time.Millisecond)
+		}()
 		fmt.Println(s)
 	}
 }

@@ -51,7 +51,7 @@ func main() {
 	// WordCount("x b")
 
 	read("hello, world!")
-	// read2()
+	myReader_read()
 
 	sumChannel()
 

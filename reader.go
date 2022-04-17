@@ -42,7 +42,7 @@ func read(s string) {
 	}
 }
 
-func read2() {
+func myReader_read() {
 	b := make([]byte, 8)
 	r2 := MyReader{}
 	l := 0
